@@ -148,7 +148,33 @@ export default function Register() {
               </div>
             ))}
 
-            {error && <div style={styles.errorBox}>⚠️ {error}</div>}
+           {sel && sel.entryFee !== 'Free' && (
+  <div style={styles.payBox}>
+    <div style={styles.payTitle}>💰 ENTRY FEE PAYMENT</div>
+    <div style={styles.payAmount}>{sel.entryFee}</div>
+    <p style={styles.payInstr}>Scan QR code ya UPI ID pe pay karo, phir screenshot WhatsApp karo</p>
+    <div style={styles.payContent}>
+      <img src="/qr.png" alt="Payment QR" style={styles.qrImg} />
+      <div style={styles.payRight}>
+        <div style={styles.upiBox}>
+          <span style={styles.upiLabel}>UPI ID</span>
+          <span style={styles.upiId}>sahuanmol7999-1@okicici</span>
+          <button onClick={() => {
+            navigator.clipboard.writeText('sahuanmol7999-1@okicici');
+            alert('UPI ID copied!');
+          }} style={styles.copyBtn}>📋 Copy</button>
+        </div>
+        <a href="https://wa.me/918780012870?text=Hi%20I%20paid%20entry%20fee%20for%20scrim%20-%20sending%20screenshot"
+          target="_blank" rel="noreferrer" style={styles.screenshotBtn}>
+          📸 Send Payment Screenshot
+        </a>
+        <p style={styles.payNote}>⚠️ Slot confirm hoga payment verify hone ke baad</p>
+      </div>
+    </div>
+  </div>
+)}
+
+{error && <div style={styles.errorBox}>⚠️ {error}</div>}
 
             <button onClick={handleSubmit} style={styles.submitBtn}>
               ⚡ CONFIRM REGISTRATION
@@ -176,6 +202,7 @@ export default function Register() {
       </div>
     </div>
   );
+  
 }
 
 const inp = {
@@ -295,4 +322,68 @@ const styles = {
     fontSize: 12, letterSpacing: 1, padding: '10px 20px',
     borderRadius: 4, cursor: 'pointer', marginTop: 8,
   },
+  payBox: {
+  background: 'rgba(255,215,0,0.05)',
+  border: '1px solid rgba(255,215,0,0.2)',
+  borderRadius: 12, padding: '1.25rem',
+  display: 'flex', flexDirection: 'column', gap: 10,
+},
+payTitle: {
+  fontFamily: 'Nunito, sans-serif', fontWeight: 800,
+  fontSize: 14, color: '#ffd700', letterSpacing: 1,
+},
+payAmount: {
+  fontFamily: 'Nunito, sans-serif', fontWeight: 900,
+  fontSize: 28, color: '#ff9900',
+},
+payInstr: {
+  fontSize: 13, color: '#8080a0',
+  fontFamily: 'Nunito, sans-serif', lineHeight: 1.5,
+},
+payContent: {
+  display: 'flex', gap: 16, flexWrap: 'wrap',
+  alignItems: 'flex-start',
+},
+qrImg: {
+  width: 150, height: 150,
+  borderRadius: 12,
+  border: '2px solid rgba(255,215,0,0.2)',
+},
+payRight: {
+  display: 'flex', flexDirection: 'column', gap: 10, flex: 1,
+},
+upiBox: {
+  background: 'rgba(255,255,255,0.04)',
+  border: '1px solid rgba(255,255,255,0.08)',
+  borderRadius: 8, padding: '10px 12px',
+  display: 'flex', flexDirection: 'column', gap: 4,
+},
+upiLabel: {
+  fontSize: 10, color: '#4a4a6a',
+  fontFamily: 'Nunito, sans-serif', fontWeight: 700,
+  letterSpacing: 1.5,
+},
+upiId: {
+  fontSize: 15, color: '#e8e8f0',
+  fontFamily: 'Nunito, sans-serif', fontWeight: 700,
+},
+copyBtn: {
+  background: 'rgba(255,77,0,0.1)',
+  border: '1px solid rgba(255,77,0,0.3)',
+  color: '#ff9900', fontSize: 12,
+  fontFamily: 'Nunito, sans-serif', fontWeight: 700,
+  padding: '6px 12px', borderRadius: 6,
+  cursor: 'pointer', width: 'fit-content',
+},
+screenshotBtn: {
+  display: 'block', textAlign: 'center',
+  background: '#25d366', color: '#000',
+  fontWeight: 800, fontFamily: 'Nunito, sans-serif',
+  fontSize: 14, padding: '12px',
+  borderRadius: 10, textDecoration: 'none',
+},
+payNote: {
+  fontSize: 12, color: '#6b6b8a',
+  fontFamily: 'Nunito, sans-serif', lineHeight: 1.5,
+},
 };
