@@ -80,6 +80,20 @@ select {
 
 * {
   max-width: 100%;
-} 
+} @media (max-width: 768px) {
+  nav > div > div:nth-child(2) { display: none !important; }
+  nav > div > div:nth-child(3) { display: flex !important; }
+}
+
+@media (min-width: 769px) {
+  nav > div > div:nth-child(3) { display: none !important; }
+}
+img.emoji {
+  height: 1.2em;
+  width: 1.2em;
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.2em;
+  display: inline-block;
+}
 
 }

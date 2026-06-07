@@ -72,7 +72,7 @@ export default function Admin() {
         />
         {passErr && <p style={styles.loginErr}>{passErr}</p>}
         <button onClick={login} style={styles.loginBtn}>ENTER PANEL</button>
-        <p style={styles.loginHint}>Default password: <code>admin123</code></p>
+        <p style={styles.loginHint}>Hint: ask the developer 😜</p>
       </div>
     </div>
   );

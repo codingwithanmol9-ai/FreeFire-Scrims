@@ -76,12 +76,13 @@ export default function Navbar() {
 }
 
 const styles = {
-  nav: {
+nav: {
     position: 'sticky', top: 0, zIndex: 100,
-    background: 'rgba(5,5,7,0.85)',
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
-    borderBottom: '1px solid rgba(255,77,0,0.15)',
+    background: 'rgba(10,10,16,0.75)',
+    backdropFilter: 'saturate(180%) blur(25px)',
+    WebkitBackdropFilter: 'saturate(180%) blur(25px)',
+    borderBottom: '1px solid rgba(255,255,255,0.08)',
+    boxShadow: '0 1px 0 rgba(255,77,0,0.1)',
   },
   inner: {
     maxWidth: 1200, margin: '0 auto',
