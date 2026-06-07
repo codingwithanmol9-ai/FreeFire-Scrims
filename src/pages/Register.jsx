@@ -386,4 +386,5 @@ payNote: {
   fontSize: 12, color: '#6b6b8a',
   fontFamily: 'Nunito, sans-serif', lineHeight: 1.5,
 },
+
 };
