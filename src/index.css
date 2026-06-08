@@ -89,11 +89,13 @@ select {
   nav > div > div:nth-child(3) { display: none !important; }
 }
 img.emoji {
-  height: 1.2em;
-  width: 1.2em;
-  margin: 0 0.05em 0 0.1em;
-  vertical-align: -0.2em;
-  display: inline-block;
+  height: 1em !important;
+  width: 1em !important;
+  max-height: 1em !important;
+  max-width: 1em !important;
+  margin: 0 0.05em 0 0.1em !important;
+  vertical-align: -0.1em !important;
+  display: inline !important;
 }
 
 }
