@@ -5,9 +5,26 @@ import { getTournaments, getResults } from '../data/store';
 import TournamentCard from '../components/TournamentCard';
 
 export default function Home() {
+
   const [tournaments, setTournaments] = useState([]);
   const [results, setResults] = useState([]);
+const [timeLeft, setTimeLeft] = useState({});
 
+useEffect(() => {
+  const target = new Date('2026-06-16T20:00:00');
+  const interval = setInterval(() => {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) { setTimeLeft({ expired: true }); clearInterval(interval); return; }
+    setTimeLeft({
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((diff % (1000 * 60)) / 1000),
+    });
+  }, 1000);
+  return () => clearInterval(interval);
+}, []);
   useEffect(() => {
     setTournaments(getTournaments().slice(0, 3));
     setResults(getResults().slice(0, 3));
@@ -34,6 +51,33 @@ export default function Home() {
             <Link to="/register" style={styles.secondaryBtn}>📝 REGISTER SQUAD</Link>
           </div>
           <div style={styles.heroContact}>
+            {/* Countdown */}
+<div style={styles.countdown}>
+  <div style={styles.countdownLabel}>⏱️ SEASON 1 STARTS IN</div>
+  {timeLeft.expired ? (
+    <div style={styles.countdownLive}>🔴 TOURNAMENT IS LIVE!</div>
+  ) : (
+    <div style={styles.countdownBoxes}>
+      {[
+        { n: timeLeft.days, l: 'DAYS' },
+        { n: timeLeft.hours, l: 'HRS' },
+        { n: timeLeft.minutes, l: 'MIN' },
+        { n: timeLeft.seconds, l: 'SEC' },
+      ].map(t => (
+        <div key={t.l} style={styles.countBox}>
+          <span style={styles.countNum}>{String(t.n).padStart(2, '0')}</span>
+          <span style={styles.countLabel}>{t.l}</span>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+{/* WhatsApp Group */}
+<a href="https://whatsapp.com/channel/0029VbDRIsg1nozFM6DnTK1m"
+  target="_blank" rel="noreferrer" style={styles.waGroupBtn}>
+  📢 JOIN FF SCRIMS CHANNEL
+</a>
             <span style={styles.heroContactLabel}>JOIN / ENQUIRE:</span>
             <a href="tel:8780012870" style={styles.heroPhone}>📞 8780012870</a>
             <a href="https://wa.me/918780012870" target="_blank" rel="noreferrer" style={styles.waLink}>
@@ -151,7 +195,8 @@ export default function Home() {
         </div>
       </section>
     </div>
-  );
+    
+  ); 
 }
 
 const styles = {
@@ -359,4 +404,48 @@ const styles = {
     fontSize: 16, padding: '14px 28px', borderRadius: 5,
     textDecoration: 'none',
   },
+  countdown: {
+  marginTop: 24,
+  display: 'flex', flexDirection: 'column', gap: 10,
+},
+countdownLabel: {
+  fontSize: 11, color: '#4a4a6a',
+  fontFamily: 'Nunito, sans-serif', fontWeight: 700,
+  letterSpacing: 2,
+},
+countdownLive: {
+  fontSize: 20, color: '#ff4d00',
+  fontFamily: 'Nunito, sans-serif', fontWeight: 900,
+  letterSpacing: 1,
+},
+countdownBoxes: {
+  display: 'flex', gap: 10,
+},
+countBox: {
+  background: 'rgba(255,77,0,0.08)',
+  border: '1px solid rgba(255,77,0,0.3)',
+  borderRadius: 10, padding: '10px 14px',
+  display: 'flex', flexDirection: 'column',
+  alignItems: 'center', gap: 2,
+  minWidth: 58,
+},
+countNum: {
+  fontFamily: 'Nunito, sans-serif', fontWeight: 900,
+  fontSize: 28, color: '#ff4d00',
+  lineHeight: 1,
+},
+countLabel: {
+  fontSize: 9, color: '#4a4a6a',
+  fontFamily: 'Nunito, sans-serif', fontWeight: 700,
+  letterSpacing: 2,
+},
+waGroupBtn: {
+  display: 'inline-block',
+  background: 'linear-gradient(135deg, #25d366, #128c7e)',
+  color: '#fff', fontWeight: 800,
+  fontFamily: 'Nunito, sans-serif',
+  fontSize: 14, padding: '12px 24px',
+  borderRadius: 12, textDecoration: 'none',
+  marginTop: 8, letterSpacing: 0.5,
+},
 };
