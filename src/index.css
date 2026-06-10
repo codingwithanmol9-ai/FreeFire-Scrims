@@ -97,5 +97,9 @@ img.emoji {
   vertical-align: -0.1em !important;
   display: inline !important;
 }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
 }

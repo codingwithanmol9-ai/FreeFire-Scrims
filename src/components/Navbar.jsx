@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const CONTACT = '8780012870';
+const ANNOUNCEMENT = "🔴 LIVE: Room ID 8 PM pe milega — WhatsApp karo 8780012870 | 15 June Solo Tournament — FREE ENTRY! Register karo abhi!";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,11 @@ export default function Navbar() {
   ];
 
   return (
-    <>
+    <> <div style={styles.announceBanner}>
+  <div style={styles.announceTrack}>
+    <span style={styles.announceText}>{ANNOUNCEMENT}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;{ANNOUNCEMENT}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
       <nav style={styles.nav}>
         <div style={styles.inner}>
           <Link to="/" style={styles.logo}>
@@ -201,4 +206,23 @@ nav: {
     borderRadius: 12, textAlign: 'center',
     textDecoration: 'none',
   },
+  announceBanner: {
+  background: 'linear-gradient(135deg, #ff4d00, #ff9900)',
+  overflow: 'hidden',
+  height: 32,
+  display: 'flex',
+  alignItems: 'center',
+},
+announceTrack: {
+  display: 'flex',
+  animation: 'marquee 20s linear infinite',
+  whiteSpace: 'nowrap',
+},
+announceText: {
+  color: '#000',
+  fontFamily: 'Nunito, sans-serif',
+  fontWeight: 800,
+  fontSize: 13,
+  letterSpacing: 0.5,
+},
 };

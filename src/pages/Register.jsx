@@ -17,6 +17,8 @@ export default function Register() {
     member4: '', member4Id: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [notifyNum, setNotifyNum] = useState('');
+const [notifyDone, setNotifyDone] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -61,6 +63,31 @@ export default function Register() {
             <a href="https://wa.me/918780012870" target="_blank" rel="noreferrer" style={styles.waBtn}>💬 WhatsApp</a>
           </div>
           <button onClick={() => { setSubmitted(false); setForm({ tournamentId: '', teamName: '', leader: '', leaderId: '', phone: '', member2: '', member2Id: '', member3: '', member3Id: '', member4: '', member4Id: '' }); }}
+          {!notifyDone ? (
+  <div style={styles.notifyBox}>
+    <p style={styles.notifyTitle}>🔔 Tournament Reminder Loge?</p>
+    <p style={styles.notifySub}>Match se 1 ghante pehle WhatsApp pe reminder aayega!</p>
+    <div style={styles.notifyRow}>
+      <input
+        value={notifyNum}
+        onChange={e => setNotifyNum(e.target.value)}
+        placeholder="WhatsApp number"
+        style={{ ...styles.input, flex: 1 }}
+        type="tel"
+      />
+      <button onClick={() => {
+        if (notifyNum.length === 10) {
+          window.open(`https://wa.me/918780012870?text=Reminder%20chahiye%20tournament%20ke%20liye%20-%20${notifyNum}`, '_blank');
+          setNotifyDone(true);
+        }
+      }} style={styles.notifyBtn}>REMIND ME</button>
+    </div>
+  </div>
+) : (
+  <div style={{ color: '#00ff88', fontFamily: 'Nunito, sans-serif', fontSize: 14 }}>
+    ✅ Reminder set! WhatsApp pe message aayega!
+  </div>
+)}
             style={styles.resetBtn}>
             REGISTER ANOTHER SQUAD
           </button>
@@ -385,6 +412,31 @@ screenshotBtn: {
 payNote: {
   fontSize: 12, color: '#6b6b8a',
   fontFamily: 'Nunito, sans-serif', lineHeight: 1.5,
+},
+notifyBox: {
+  background: 'rgba(37,211,102,0.06)',
+  border: '1px solid rgba(37,211,102,0.2)',
+  borderRadius: 10, padding: '1rem',
+  display: 'flex', flexDirection: 'column', gap: 8,
+},
+notifyTitle: {
+  fontFamily: 'Nunito, sans-serif',
+  fontWeight: 800, fontSize: 15, color: '#00ff88',
+},
+notifySub: {
+  fontSize: 12, color: '#6b6b8a',
+  fontFamily: 'Nunito, sans-serif',
+},
+notifyRow: {
+  display: 'flex', gap: 8,
+},
+notifyBtn: {
+  background: '#25d366',
+  color: '#000', fontWeight: 800,
+  fontFamily: 'Nunito, sans-serif',
+  fontSize: 12, padding: '0 16px',
+  border: 'none', borderRadius: 6,
+  cursor: 'pointer', whiteSpace: 'nowrap',
 },
 
 };

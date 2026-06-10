@@ -11,6 +11,23 @@ export default function Results() {
       <div style={styles.inner}>
         <h1 style={styles.title}>TOURNAMENT RESULTS</h1>
         <p style={styles.sub}>Hall of fame — every champion remembered</p>
+        {/* Winner Gallery */}
+{results.length > 0 && (
+  <div style={styles.gallerySection}>
+    <h2 style={styles.galleryTitle}>🏆 HALL OF FAME</h2>
+    <div style={styles.galleryGrid}>
+      {results.map(r => (
+        <div key={r.id} style={styles.galleryCard}>
+          <span style={styles.galleryMedal}>🥇</span>
+          <div style={styles.galleryName}>{r.winner}</div>
+          <div style={styles.galleryTournament}>{r.tournamentName}</div>
+          <div style={styles.galleryTournament}>{r.date}</div>
+          {r.mvp && <div style={styles.galleryKills}>🎯 MVP: {r.mvp} ({r.kills} kills)</div>}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
 
         {results.length === 0 ? (
           <div style={styles.empty}>No results yet. Stay tuned after the first tournament!</div>
@@ -114,4 +131,45 @@ const styles = {
     fontSize: 17, color: '#ffd700',
   },
   mvpKills: { fontSize: 12, color: '#8a7000', fontFamily: 'Exo 2, sans-serif' },
+  gallerySection: {
+  marginTop: 40,
+},
+galleryTitle: {
+  fontFamily: 'Nunito, sans-serif',
+  fontSize: 22, fontWeight: 900,
+  color: '#e8e8f0', letterSpacing: 2,
+  borderLeft: '4px solid #ffd700',
+  paddingLeft: 16, marginBottom: 24,
+},
+galleryGrid: {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+  gap: 16,
+},
+galleryCard: {
+  background: 'linear-gradient(145deg, #0d0d14, #10101a)',
+  border: '1px solid rgba(255,215,0,0.2)',
+  borderRadius: 10,
+  padding: '1.25rem',
+  textAlign: 'center',
+  display: 'flex', flexDirection: 'column',
+  gap: 8, alignItems: 'center',
+},
+galleryMedal: { fontSize: 36 },
+galleryName: {
+  fontFamily: 'Nunito, sans-serif',
+  fontWeight: 900, fontSize: 17,
+  color: '#ffd700',
+},
+galleryTournament: {
+  fontSize: 12, color: '#4a4a6a',
+  fontFamily: 'Nunito, sans-serif',
+},
+galleryKills: {
+  background: 'rgba(255,77,0,0.1)',
+  border: '1px solid rgba(255,77,0,0.2)',
+  borderRadius: 20, padding: '3px 12px',
+  fontSize: 12, color: '#ff9900',
+  fontFamily: 'Nunito, sans-serif', fontWeight: 700,
+},
 };
